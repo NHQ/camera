@@ -1,0 +1,72 @@
+body{
+  display: flex;
+  height: 100%; 
+  flex-direction:column;
+}
+
+#display{
+  width: 100%;
+}
+
+
+#controls{
+  display: flex;
+  flex-direction: row;
+  position:fixed;
+
+}
+
+#source{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width: 640px;
+  height: 480px;
+}
+
+#mirror{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width: 640px;
+  height: 480px;
+  z-index:2;
+}
+
+#snap{
+  border-radius: 50% 50%;
+  width: 150px;
+  height: 150px;
+  outline:none;
+  background: red;
+  position:fixed;
+  top: 80%;
+  margin: 0 auto;
+}
+
+@media all and (orientation: landscape){
+
+  #source{
+    width: 640px;
+    height: 480px;
+  }
+
+}
+
+@media all and (orientation: portrait){
+
+  #source{
+    height: 640px;
+    width: 480px;
+  }
+
+  #snap{
+    margin: 0 auto;
+    top: 80%;
+  }
+
+}
+
+
+
+
