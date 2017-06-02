@@ -26,6 +26,10 @@ userMediaStream.on('stream', function(stream){
 
     video.src = bjork
 
+    video.onloadedmetadata = function(){
+      console.log(this.videoWidth, this.videoHeight)
+    }
+
     video.play()
 
     if(controller) {// source reboot
@@ -67,5 +71,5 @@ userMediaStream.on('stream', function(stream){
 })
 
 function clickSnap (){
-  controller.expose({shutterSpeed: 3000, filmSpeed: 60})
+  controller.expose({shutterSpeed: 100, filmSpeed: 4.2})
 }

@@ -1,6 +1,6 @@
 var em = require('events').EventEmitter
 var om = new em
-var audioSelect = document.querySelector('select#audioSource');
+//var audioSelect = document.querySelector('select#audioSource');
 var videoSelect = document.querySelector('select#videoSource');
 
 navigator.getUserMedia = navigator.getUserMedia ||
@@ -15,12 +15,14 @@ function gotSources(sourceInfos) {
     var sourceInfo = sourceInfos[i];
     var option = document.createElement('option');
     option.value = sourceInfo.id;
-    if (sourceInfo.kind === 'audio') {
+    if (sourceInfo.kind === 'audioinput') {
+      continue // no audio in baescam
       option.text = sourceInfo.label || 'microphone ' +
-        (++audioSelections);
+      ++audioSelections
       audioSelect.appendChild(option);
-    } else if (sourceInfo.kind === 'video') {
+    } else if (sourceInfo.kind === 'videoinput') {
       option.text = sourceInfo.label || 'camera ' + (++videoSelections);
+      ++videoSelections
       videoSelect.appendChild(option);
     } else {
       console.log('Some other kind of source: ', sourceInfo);
@@ -29,10 +31,10 @@ function gotSources(sourceInfos) {
 }
 
 if (typeof MediaStreamTrack === 'undefined' ||
-    typeof MediaStreamTrack.getSources === 'undefined') {
+    typeof navigator.mediaDevices.enumerateDevices === 'undefined') {
   alert('This browser does not support MediaStreamTrack.\n\nTry Chrome.');
 } else {
-  MediaStreamTrack.getSources(gotSources);
+  navigator.mediaDevices.enumerateDevices().then(gotSources)
 }
 
 function successCallback(stream) {
@@ -45,7 +47,7 @@ function errorCallback(error) {
 }
 
 function start() {
-  var audioSource = audioSelect.value;
+//  var audioSource = audioSelect.value;
   var videoSource = videoSelect.value;
   var constraints = {
     audio: false,
@@ -57,15 +59,15 @@ function start() {
     },
 */
     video: !(Boolean(videoSource)) ? true : {
-      optional: [{
+        width: 1280,
+        height: 720,
         sourceId: videoSource
-      }]
     }
   };
   navigator.getUserMedia(constraints, successCallback, errorCallback);
 }
 
-audioSelect.onchange = start;
+//audioSelect.onchange = start;
 videoSelect.onchange = start;
 
 //start();

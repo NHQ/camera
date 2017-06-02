@@ -1,33 +1,35 @@
+html, body {
+  height: 100%;
+}
+
 body{
   display: flex;
-  height: 100%; 
-  flex-direction:column;
+  width:100%;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding:0;
 }
 
 #display{
-  width: 100%;
-}
-
-
-#controls{
   display: flex;
-  flex-direction: row;
-  position:fixed;
-
+  flex-direction: column;
 }
 
-#source{
-  position:absolute;
-  top:0px;
-  left:0px;
+
+#controls, #controls .select{
+  display: flex;
+  flex-direction: column;
+}
+
+#source {
   width: 640px;
   height: 480px;
 }
 
 #mirror{
-  position:absolute;
-  top:0px;
-  left:0px;
+  display:none;
   width: 640px;
   height: 480px;
   z-index:2;
@@ -39,8 +41,6 @@ body{
   height: 150px;
   outline:none;
   background: red;
-  position:fixed;
-  top: 80%;
   margin: 0 auto;
 }
 
