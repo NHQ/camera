@@ -10,7 +10,7 @@ var videoEl = document.getElementById('source')
 var film = document.getElementById('film')
 var mirror = document.getElementById('mirror')
 var on = require('on-off')
-
+var qr = require('qrcode-reader')
 var controller = null
 
 var bjork
@@ -47,12 +47,18 @@ userMediaStream.on('stream', function(stream){
     display.insertBefore(video, film)
 
     controller.on('expose', function(data){
-        var render = film.getContext('2d')
-        render.putImageData(data, 0, 0)
-        var url = film.toDataURL()
+        let qrr = new qr()
+        qrr.callback = function(er, re){
+          if(re) alert(JSON.stringify(re)) 
+        }
+        var q = qrr.decode(data)
+        //var render = film.getContext('2d')
+        //render.putImageData(data, 0, 0)
+        //var url = film.toDataURL()
     })
 
-    on(snap, 'click', clickSnap) 
+    setInterval(controller.expose, 1000 / 24)
+    //on(snap, 'click', clickSnap) 
     
 
 /*
@@ -71,5 +77,5 @@ userMediaStream.on('stream', function(stream){
 })
 
 function clickSnap (){
-  controller.expose({shutterSpeed: 100, filmSpeed: 4.2})
+  controller.expose({shutterSpeed: 24, filmSpeed: 1.25})
 }
