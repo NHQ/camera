@@ -1,12 +1,15 @@
-var em = require('events').EventEmitter
-var om = new em
-//var audioSelect = document.querySelector('select#audioSource');
-var videoSelect = document.querySelector('select#videoSource');
-
 navigator.getUserMedia = navigator.getUserMedia ||
   navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
-module.exports = om
+module.exports = function(cb){
+  if (typeof MediaStreamTrack === 'undefined' ||
+      typeof navigator.mediaDevices.enumerateDevices === 'undefined') {
+    alert('This browser does not support MediaStreamTrack.\n\nTry Chrome.');
+  } else {
+    navigator.mediaDevices.enumerateDevices().then(cb)
+  }
+
+} 
 
 function gotSources(sourceInfos) {
   var audioSelections = 0
@@ -30,12 +33,6 @@ function gotSources(sourceInfos) {
   }
 }
 
-if (typeof MediaStreamTrack === 'undefined' ||
-    typeof navigator.mediaDevices.enumerateDevices === 'undefined') {
-  alert('This browser does not support MediaStreamTrack.\n\nTry Chrome.');
-} else {
-  navigator.mediaDevices.enumerateDevices().then(gotSources)
-}
 
 function successCallback(stream) {
   om.emit('stream', stream)
@@ -68,7 +65,7 @@ function start() {
 }
 
 //audioSelect.onchange = start;
-videoSelect.onchange = start;
+//videoSelect.onchange = start;
 
 //start();
 

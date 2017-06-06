@@ -6,42 +6,77 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
-    <div id="display">
-      <video id="source" autoplay></video>
-      <canvas id="mirror"  width="640" height="480"></canvas>
-      <canvas id="film" width="640" height="480"></canvas>
-    </div>
-      
-    <div id="controls">
-      <!-- 
-      <div class="select">
+    <div class=module> 
+      <div id="display">
+        <video id="source" autoplay></video>
+        <canvas id="mirror"  width="640" height="480"></canvas>
+        <canvas id="film" width="640" height="480"></canvas>
+      </div>
         
-        <label for="audioSource">Audio source: </label>
-        
-        <select id="audioSource">
+      <div class="controls avoptions">
+        <div class=select>
+          <p>select video source:</p>
+          <select id="videoinput">
+          </select>
+        </div>
+        <div class=select>
+          <p>select audio source:</p>
+          <select id="audioinput">
+          </select>
+        </div>
+        <div class=select>
+          <p>select video monitor:</p>
+          <select id="videooutput">
+          </select>
+        </div>
+        <div class=select>
+          <p>select addudio monitor:</p>
+          <select id="audiooutput">
+          </select>
+        </div>
+      </div>
+      <div class="controls options">
+
+        <!-- 
+        <div class="select">
           
-          <option value="">off</option>
+          <label for="audioSource">Audio source: </label>
+          
+          <select id="audioSource">
+            
+            <option value="">off</option>
+          
+          </select>
         
-        </select>
+        </div>
+        -->
+        <div class="select">
+     
+          <button value=qr id=newid>create new ID</button>
+      
+        </div>
+
+        <div class="select">
+     
+          <button value=qr id=scanqr>scan QR code</button>
+      
+        </div>
+
+        <div class="select">
+
+          <button value=text id=paste>input / paste key</option>
+          
+        </div>
+
+        <div class="select">
+
+          <button value=load id=loadkey>load key file</option>
+          
+        </div>
+
       
       </div>
-      -->
-      <div class="select">
-
-        <label for="videoSource">Video source: </label>
-        
-        <select id="videoSource">
-        
-          <option value="">off</option>
-        
-        </select>
-    
-      </div>
-
-      <button id="snap">take photo</button>
-    
-    </div>
-    
+    </div>    
     <script type="text/javascript" src="bundle.js"></script>
   </body>
 </html>
